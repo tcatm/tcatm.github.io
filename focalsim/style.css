@@ -1,0 +1,221 @@
+/* Ensure full viewport usage */
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background: #f9f9f9;
+  font-family: Arial, sans-serif;
+}
+
+/* Main app container fills the browser and splits into simulation (75%) and gallery (25%) */
+#app {
+  display: flex;
+  height: 100%;
+  width: 100%;
+}
+
+/* Simulation area takes approximately 75% of the width */
+#simulation {
+  flex: 5;
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+/* Gallery area takes approximately 25% of the width */
+#gallery {
+  flex: 1;
+  overflow-y: auto;
+  border-left: 1px solid #ccc;
+  padding: 10px;
+  box-sizing: border-box;
+  background: #fff;
+}
+
+/* Canvas wrapper (for the simulation view) */
+.canvas-wrapper {
+  width: 100%;
+  flex-grow: 1;
+  aspect-ratio: 3 / 2;
+  max-height: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.canvas-wrapper canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  margin: 0 auto;
+}
+
+/* Simulation controls container */
+.simulation-controls {
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 10px;
+  background: linear-gradient(135deg, #fdfdfd, #e9e9e9);
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  box-sizing: border-box;
+}
+
+.main-row {
+  gap: 20px;
+}
+
+/* Flex container for controls: left (vertical group) and right (shutter) */
+.control-row {
+  display: flex;
+  justify-content: left;
+  align-items: flex-start;
+}
+
+/* Left controls column (vertical layout) */
+.left-controls {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+/* Right controls column for the shutter button */
+.right-controls {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+/* Generic control groups (each row) */
+.control-group {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+/* Sensor & Aspect group */
+.sensor-aspect-group .sensor-select-label,
+.sensor-aspect-group .aspect-select-label {
+  margin-right: 4px;
+}
+
+.sensor-aspect-group .sensor-select,
+.sensor-aspect-group .aspect-select {
+  margin-right: 8px;
+}
+
+.spacer {
+  width: 16px;
+}
+
+/* Focal group */
+.focal-group .focal-label {
+  margin-right: 8px;
+}
+
+.focal-slider {
+  vertical-align: middle;
+  margin-right: 8px;
+  flex: 1;
+}
+
+/* Quick-select container */
+.quick-select {
+  margin: 8px 0;
+}
+
+.quick-select-btn {
+  margin-right: 5px;
+  padding: 4px 8px;
+  border-radius: 4px;
+  background: linear-gradient(135deg, #fff, #ddd);
+  border: 1px solid #999;
+  cursor: pointer;
+}
+
+.quick-select-btn.active {
+  background: linear-gradient(135deg, #cceeff, #99ddff);
+  border-color: #3399ff;
+}
+
+/* Orientation toggle button */
+.toggle-orientation-btn {
+  padding: 4px 8px;
+  border-radius: 4px;
+  background: linear-gradient(135deg, #ddd, #bbb);
+  border: 1px solid #999;
+  box-shadow: inset 0 1px 2px rgba(0,0,0,0.2);
+  cursor: pointer;
+  margin-left: 8px;
+}
+
+/* Shutter button container (right column) */
+.shutter-container {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+/* Shutter button styling */
+.shutter-btn {
+  padding: 12px 20px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #fff, #ccc);
+  border: 2px solid #999;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+  cursor: pointer;
+  font-weight: bold;
+  display: block;
+}
+
+/* Gallery image container */
+.gallery-image {
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+/* Ensure the image area (canvas wrapper) maintains a 3:2 ratio */
+.gallery-image .canvas-wrapper {
+  width: 100%;
+  aspect-ratio: 3 / 2;
+  background: #f0f0f0;
+}
+
+/* Caption container: inline layout for caption and delete button */
+.gallery-caption-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 4px 8px;
+  font-size: 0.85em;
+  background: #fafafa;
+  border-top: 1px solid #eee;
+  box-sizing: border-box;
+}
+
+/* Caption text */
+.gallery-caption-text {
+  flex: 1;
+  text-align: left;
+}
+
+/* Delete button styled as an "X" */
+.gallery-delete-btn {
+  background: transparent;
+  border: none;
+  color: #a00;
+  font-size: 1em;
+  cursor: pointer;
+  padding: 0 4px;
+}
+
+.gallery-delete-btn:hover {
+  color: #e60000;
+}
