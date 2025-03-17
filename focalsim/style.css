@@ -1,25 +1,185 @@
-/* Ensure full viewport usage */
+/* ===============================
+   CSS Variables & Design Tokens
+   =============================== */
+
+:root {
+  /* Base Colors */
+  --color-white: #ffffff;
+  --color-light: #f7f9fc;
+  --color-gray: #e1e4e8;
+  --color-dark-gray: #b1b8c1;
+  
+  /* Soft Pastel Blue Accent Palette */
+  --accent-blue: #f0f8ff;          /* Primary accent for gradients */
+  --accent-blue-dark: #e0f0ff;     /* For hover states */
+  --accent-blue-light: #b2d4ff;    /* Lighter variant */
+  
+  /* Shutter Button Gradients */
+  --shutter-gradient-start: var(--color-white);
+  --shutter-gradient-end: var(--accent-blue);
+  --shutter-gradient-hover-end: var(--accent-blue-dark);
+  --shutter-gradient-active-start: #f0f8ff; /* Light, airy blue tint */
+  --shutter-gradient-active-end: var(--accent-blue-dark);
+  
+  /* Quick-Select & Toggle Button Gradients */
+  --quick-select-gradient-start: var(--color-white);
+  --quick-select-gradient-end: #f0f8ff;       /* Very light blue */
+  --quick-select-gradient-hover-end: #e0f0ff;
+  --quick-select-gradient-active-start: #dfefff;
+  --quick-select-gradient-active-end: #cfefff;
+  
+  /* Gallery Delete Button (Danger Style) */
+  --delete-gradient-start: #ffe6e6;
+  --delete-gradient-end: #ffcccc;
+  --delete-gradient-hover-end: #ffb3b3;
+  --delete-gradient-active-start: #ffe0e0;
+  --delete-gradient-active-end: #ffcccc;
+  --delete-border: #ff9999;
+  
+  /* Layout & Misc */
+  --background: var(--color-light);
+  --gallery-border: var(--color-gray);
+  --gallery-bg: var(--color-white);
+  --gallery-caption-bg: #fafafa;
+  --gallery-caption-border: #eee;
+  --gallery-image-canvas-bg: #f7f9fc;
+  
+  /* Border Radius */
+  --btn-border-radius: 5px;
+  --quick-btn-border-radius: 4px;
+  --gallery-img-border-radius: 6px;
+  --simulation-control-border-radius: 0; /* Removed border radius */
+  
+  /* Box Shadows */
+  --btn-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  --btn-shadow-hover: 0 4px 10px rgba(0, 0, 0, 0.1);
+  --btn-shadow-active: 0 1px 3px rgba(0, 0, 0, 0.1);
+  --quick-btn-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
+  --quick-btn-shadow-hover: 0 2px 4px rgba(0, 0, 0, 0.08);
+  --simulation-control-shadow: none; /* Removed shadow */
+  --gallery-img-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  
+  /* Transitions */
+  --transition-speed: 0.2s;
+}
+
+/* ================================
+   Common Base for All Buttons
+   ================================ */
+.btn,
+.quick-select-btn,
+.toggle-orientation-btn,
+.shutter-btn,
+.gallery-delete-btn {
+  cursor: pointer;
+  display: inline-block;
+  transition: background var(--transition-speed) ease, 
+              box-shadow var(--transition-speed) ease, 
+              transform var(--transition-speed) ease;
+}
+
+/* -------------------------------
+   Distinct Shutter Button Style
+   ------------------------------- */
+.shutter-btn {
+  padding: 12px 20px;
+  border-radius: var(--btn-border-radius);
+  background: linear-gradient(135deg, var(--shutter-gradient-start), var(--shutter-gradient-end));
+  border: 2px solid var(--color-dark-gray);
+  box-shadow: var(--btn-shadow);
+  font-weight: bold;
+}
+
+.shutter-btn:hover {
+  background: linear-gradient(135deg, var(--shutter-gradient-start), var(--shutter-gradient-hover-end));
+  box-shadow: var(--btn-shadow-hover);
+  transform: translateY(0);
+}
+
+.shutter-btn:active {
+  background: linear-gradient(135deg, var(--shutter-gradient-active-start), var(--shutter-gradient-active-end));
+  box-shadow: var(--btn-shadow-active);
+  transform: translateY(0);
+}
+
+/* ---------------------------------------
+   Generic Buttons (Quick-Select & Toggle)
+   Less extreme style with reduced padding
+   --------------------------------------- */
+.quick-select-btn,
+.toggle-orientation-btn {
+  padding: 6px 10px;
+  border-radius: var(--quick-btn-border-radius);
+  background: linear-gradient(135deg, var(--quick-select-gradient-start), var(--quick-select-gradient-end));
+  border: 1px solid var(--color-dark-gray);
+  box-shadow: var(--quick-btn-shadow);
+  font-weight: normal;
+}
+
+.quick-select-btn:hover,
+.toggle-orientation-btn:hover {
+  background: linear-gradient(135deg, var(--quick-select-gradient-start), var(--quick-select-gradient-hover-end));
+  box-shadow: var(--quick-btn-shadow-hover);
+  transform: translateY(0px);
+}
+
+.quick-select-btn:active,
+.quick-select-btn.active,
+.toggle-orientation-btn:active {
+  background: linear-gradient(135deg, var(--quick-select-gradient-active-start), var(--quick-select-gradient-active-end));
+  box-shadow: var(--quick-btn-shadow);
+  transform: translateY(0);
+}
+
+/* -----------------------------------
+   Gallery Delete Button (Danger Style)
+   ----------------------------------- */
+.gallery-delete-btn {
+  padding: 4px 8px;
+  border-radius: var(--quick-btn-border-radius);
+  background: linear-gradient(135deg, var(--delete-gradient-start), var(--delete-gradient-end));
+  border: 1px solid var(--delete-border);
+  box-shadow: var(--quick-btn-shadow);
+  font-weight: normal;
+}
+
+.gallery-delete-btn:hover {
+  background: linear-gradient(135deg, var(--delete-gradient-start), var(--delete-gradient-hover-end));
+  box-shadow: var(--quick-btn-shadow-hover);
+  transform: translateY(-1px);
+}
+
+.gallery-delete-btn:active {
+  background: linear-gradient(135deg, var(--delete-gradient-active-start), var(--delete-gradient-active-end));
+  box-shadow: var(--quick-btn-shadow);
+  transform: translateY(0);
+}
+
+/* ===============================
+   Remaining CSS for Your Layout
+   =============================== */
+
+/* Global reset & typography */
 html, body {
   height: 100%;
   margin: 0;
   padding: 0;
-  background: #f9f9f9;
+  background: var(--background);
   font-family: Arial, sans-serif;
 }
 
-/* Main app container fills the browser and splits into simulation (75%) and gallery (25%) */
+/* Main app container splits into simulation (75%) and gallery (25%) */
 #app {
   display: flex;
   height: 100%;
   width: 100%;
 }
 
-/* Simulation area takes approximately 75% of the width */
+/* Simulation area takes approximately 75% of the width and has no padding */
 #simulation {
   flex: 5;
   display: flex;
   flex-direction: column;
-  padding: 10px;
   box-sizing: border-box;
 }
 
@@ -27,10 +187,10 @@ html, body {
 #gallery {
   flex: 1;
   overflow-y: auto;
-  border-left: 1px solid #ccc;
+  border-left: 1px solid var(--gallery-border);
   padding: 10px;
   box-sizing: border-box;
-  background: #fff;
+  background: var(--gallery-bg);
 }
 
 /* Canvas wrapper (for the simulation view) */
@@ -51,14 +211,13 @@ html, body {
   align-self: center;
 }
 
-/* Simulation controls container */
+/* Simulation controls container with removed border radius & shadow, and added bottom border */
 .simulation-controls {
   width: 100%;
-  margin-bottom: 10px;
   padding: 10px;
-  background: linear-gradient(135deg, #fdfdfd, #e9e9e9);
-  border-radius: 8px;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  border-radius: var(--simulation-control-border-radius);
+  box-shadow: var(--simulation-control-shadow);
+  border-bottom: 1px solid var(--gallery-border);
   box-sizing: border-box;
 }
 
@@ -66,35 +225,31 @@ html, body {
   gap: 20px;
 }
 
-/* Flex container for controls: left (vertical group) and right (shutter) */
 .control-row {
   display: flex;
   justify-content: left;
   align-items: flex-start;
+  gap: 5px;
 }
 
-/* Left controls column (vertical layout) */
 .left-controls {
   display: flex;
   flex-direction: column;
   flex: 1;
 }
 
-/* Right controls column for the shutter button */
 .right-controls {
   display: flex;
   align-items: center;
   justify-content: flex-end;
 }
 
-/* Generic control groups (each row) */
 .control-group {
   display: flex;
   align-items: center;
   margin-bottom: 8px;
 }
 
-/* Sensor & Aspect group */
 .sensor-aspect-group .sensor-select-label,
 .sensor-aspect-group .aspect-select-label {
   margin-right: 4px;
@@ -109,7 +264,6 @@ html, body {
   width: 16px;
 }
 
-/* Focal group */
 .focal-group .focal-label {
   margin-right: 8px;
 }
@@ -120,62 +274,25 @@ html, body {
   flex: 1;
 }
 
-/* Quick-select container */
 .quick-select {
   margin: 8px 0;
+  display: flex;
+  gap: 5px;
 }
 
-.quick-select-btn {
-  margin-right: 5px;
-  padding: 4px 8px;
-  border-radius: 4px;
-  background: linear-gradient(135deg, #fff, #ddd);
-  border: 1px solid #999;
-  cursor: pointer;
-}
-
-.quick-select-btn.active {
-  background: linear-gradient(135deg, #cceeff, #99ddff);
-  border-color: #3399ff;
-}
-
-/* Orientation toggle button */
-.toggle-orientation-btn {
-  padding: 4px 8px;
-  border-radius: 4px;
-  background: linear-gradient(135deg, #ddd, #bbb);
-  border: 1px solid #999;
-  box-shadow: inset 0 1px 2px rgba(0,0,0,0.2);
-  cursor: pointer;
-  margin-left: 8px;
-}
-
-/* Shutter button container (right column) */
 .shutter-container {
   display: flex;
   justify-content: flex-end;
   align-items: center;
 }
 
-/* Shutter button styling */
-.shutter-btn {
-  padding: 12px 20px;
-  border-radius: 50%;
-  background: radial-gradient(circle, #fff, #ccc);
-  border: 2px solid #999;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.3);
-  cursor: pointer;
-  font-weight: bold;
-  display: block;
-}
-
 /* Gallery image container */
 .gallery-image {
-  border: 1px solid #ccc;
-  border-radius: 6px;
+  border: 1px solid var(--gallery-border);
+  border-radius: var(--gallery-img-border-radius);
   overflow: hidden;
-  background: #fff;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+  background: var(--gallery-bg);
+  box-shadow: var(--gallery-img-shadow);
   display: flex;
   flex-direction: column;
   margin-bottom: 20px;
@@ -185,7 +302,7 @@ html, body {
 .gallery-image .canvas-wrapper {
   width: 100%;
   aspect-ratio: 3 / 2;
-  background: #f0f0f0;
+  background: var(--gallery-image-canvas-bg);
 }
 
 /* Caption container: inline layout for caption and delete button */
@@ -195,27 +312,12 @@ html, body {
   align-items: center;
   padding: 4px 8px;
   font-size: 0.85em;
-  background: #fafafa;
-  border-top: 1px solid #eee;
+  background: var(--gallery-caption-bg);
+  border-top: 1px solid var(--gallery-caption-border);
   box-sizing: border-box;
 }
 
-/* Caption text */
 .gallery-caption-text {
   flex: 1;
   text-align: left;
-}
-
-/* Delete button styled as an "X" */
-.gallery-delete-btn {
-  background: transparent;
-  border: none;
-  color: #a00;
-  font-size: 1em;
-  cursor: pointer;
-  padding: 0 4px;
-}
-
-.gallery-delete-btn:hover {
-  color: #e60000;
 }
