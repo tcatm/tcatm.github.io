@@ -28,10 +28,20 @@ document.addEventListener('DOMContentLoaded', () => {
   galleryView = new GalleryView(appContainer, referenceCollection);
 
   galleryView.setSelectHandler((params) => {
-    simulationView.imageView.setSensor(params.sensor);
-    simulationView.imageView.setFocal(params.focal);
-    simulationView.imageView.setAspect(params.aspect);
-    simulationView.updateImageView();
+    // Find the sensor key that matches the selected sensor.
+    const sensors = referenceCollection.sensorData;
+    let foundKey = simulationView.sensorKey; // default to current key
+    for (const key in sensors) {
+      if (sensors[key].width === params.sensor.width && sensors[key].height === params.sensor.height) {
+        foundKey = key;
+        break;
+      }
+    }
+    simulationView.sensorKey = foundKey;
+    simulationView.sensor = sensors[foundKey];
+    simulationView.focal = params.focal;
+    simulationView.aspect = params.aspect;
     simulationView.updateControls();
+    simulationView.updateImageView();
   });
 });
