@@ -3,7 +3,7 @@ export const sensorData = [
     name: "Full Frame (35mm)",
     width: 36,
     height: 24,
-    commonFocals: [16, 24, 35, 50, 85, 200]
+    commonFocals: [16, 24, 28, 35, 50, 85, 135, 200]
   },
   {
     name: "Canon APS-C",
@@ -15,13 +15,13 @@ export const sensorData = [
     name: "Fuji X (APS-C)",
     width: 23.6,
     height: 15.6,
-    commonFocals: [18, 23, 27, 33, 56, 80, 90, 200]
+    commonFocals: [14, 16, 18, 23, 27, 33, 50, 56, 80, 90, 200]
   },
   {
     name: "Fuji GFX (Medium Format)",
     width: 43.8,
     height: 32.9,
-    commonFocals: [23, 35, 50, 80, 110]
+    commonFocals: [23, 35, 45, 55, 63, 80, 110, 250, 500]
   },
   {
     name: "Micro Four Thirds",

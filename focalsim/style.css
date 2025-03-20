@@ -295,7 +295,7 @@ html, body {
   box-shadow: var(--gallery-img-shadow);
   display: flex;
   flex-direction: column;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
 
 /* Ensure the image area (canvas wrapper) maintains a 3:2 ratio */
